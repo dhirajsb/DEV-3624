@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:amq="http://activemq.apache.org/schema/core"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://activemq.apache.org/schema/core
+        http://activemq.apache.org/schema/core/activemq-core-5.5.0.xsd">
+        
+   <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <value>file:/opt/FUSE/AMQ/apache-activemq-5.5.1-fuse-01-06/conf/credentials.properties</value>
+        </property>
+    </bean>
+    
+	<broker  xmlns="http://activemq.apache.org/schema/core" brokerName="secondfancy-lm" 
+		dataDirectory="./target/activemq-data/" 
+		useJmx="true" start="true" persistent="true" useShutdownHook="false" 
+		advisorySupport="false" splitSystemUsageForProducersConsumers="false" deleteAllMessagesOnStartup="true">
+		<destinationPolicy>
+		    <policyMap>
+		      <policyEntries>
+		        <policyEntry topic=">" optimizedDispatch="true" memoryLimit="1024mb" producerFlowControl="false"/>
+		        <policyEntry queue=">" optimizedDispatch="true" memoryLimit="1024mb" producerFlowControl="false"/>
+		      </policyEntries>
+		    </policyMap>
+		  </destinationPolicy>
+		<persistenceAdapter>
+	      <kahaDB directory="./target/activemq-data/kahadb" indexWriteBatchSize="10000" 
+	              indexCacheSize="1000000" enableIndexWriteAsync="true" 
+	              journalMaxFileLength="512mb" enableJournalDiskSyncs="false" 
+	              checkpointInterval="1000" maxAsyncJobs="50000"  />
+	    </persistenceAdapter>        
+	    <plugins>
+	    
+	    </plugins>
+	    <systemUsage>
+	      <systemUsage>
+	        <memoryUsage>
+	          <memoryUsage limit="1 gb"/>
+	        </memoryUsage>
+	        <storeUsage>
+	            <storeUsage limit="45048 mb" name="foo"/>
+	       </storeUsage>
+	       <tempUsage>
+	             <tempUsage limit="2048 mb"/>
+	       </tempUsage>
+	      </systemUsage>
+	    </systemUsage>
+	    
+	    <transportConnectors>
+            <transportConnector name="tcp" uri="tcp://0.0.0.0:61616?transport.closeAsync=false"/> 
+        </transportConnectors>
+    </broker>
+</beans>

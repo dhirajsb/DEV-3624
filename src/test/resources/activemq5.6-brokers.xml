@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:amq="http://activemq.apache.org/schema/core"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+  http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+   <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <value>file:/Users/praveenr/installs/apache-activemq-5.6-SNAPSHOT/conf/credentials.properties</value>
+        </property>      
+    </bean>
+
+	<broker  xmlns="http://activemq.apache.org/schema/core" brokerName="secondfancy-lm" dataDirectory="/Users/praveenr/installs/apache-activemq-5.6-SNAPSHOT/data" useJmx="true" start="true" persistent="true" useShutdownHook="false" advisorySupport="false" splitSystemUsageForProducersConsumers="false" deleteAllMessagesOnStartup="true">
+<destinationPolicy>
+    <policyMap>
+      <policyEntries>
+        <policyEntry topic=">" optimizedDispatch="true" memoryLimit="1024mb" producerFlowControl="false"/>
+        <policyEntry queue=">" optimizedDispatch="true" memoryLimit="1024mb" producerFlowControl="false"/>
+      </policyEntries>
+    </policyMap>
+  </destinationPolicy>
+<persistenceAdapter>
+                        <kahaDB directory="/Users/praveenr/installs/apache-activemq-5.6-SNAPSHOT/data/kahadb" indexWriteBatchSize="10000" indexCacheSize="1000000" enableIndexWriteAsync="true" journalMaxFileLength="512000000" enableJournalDiskSyncs="false" checkpointInterval="1000" maxAsyncJobs="50000"  />
+                </persistenceAdapter>        
+  <plugins>
+    <!-- bean id="dhBrokerStatisticsPlugin" class="com.yahoo.data_highway.activeMQdhBrokerStatisticsPlugin" xmlns="http://www.springframework.org/schema/beans" / -->
+  </plugins>
+<systemUsage>
+    <systemUsage>
+        <memoryUsage>
+          <memoryUsage limit="1gb"/>
+        </memoryUsage>
+        <storeUsage>
+            <storeUsage limit="45048mb" name="foo"/>
+       </storeUsage>
+       <tempUsage>
+             <tempUsage limit="2048mb"/>
+       </tempUsage>
+    </systemUsage>
+</systemUsage>
+		</broker>
+
+</beans>

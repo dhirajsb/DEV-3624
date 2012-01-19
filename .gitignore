@@ -1,0 +1,15 @@
+target
+.idea
+*.iml
+*.ipr
+*.iws
+overlays
+.DS_Store
+.settings
+bin
+*.swp
+*.log
+.project
+.classpath
+*.fmd
+.cache

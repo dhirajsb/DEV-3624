@@ -1,0 +1,136 @@
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+   
+    http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!--  
+    Tune ActiveMQ broker so it can handle large number of queues (tens of thousands)
+    For more information, see:
+    http://activemq.apache.org/how-do-i-configure-10s-of-1000s-of-queues-in-a-single-broker-.html
+    
+    Be sure to make necessary changes in your startup script, to 
+    
+    1. Give broker enough memory 
+    2. Disable dedicated task runner
+    
+    e.g. ACTIVEMQ_OPTS="-Xmx1024M -Dorg.apache.activemq.UseDedicatedTaskRunner=false"
+    
+    To run ActiveMQ with this configuration add xbean:conf/activemq-scalability.xml to your command
+    e.g. $ bin/activemq console xbean:conf/activemq-scalability.xml
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:amq="http://activemq.apache.org/schema/core" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans 
+    		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd   
+    	http://activemq.apache.org/schema/core 
+    		http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+    <!-- Allows us to use system properties as variables in this configuration file -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
+
+
+	<!-- when using embedded broker set a different dataDirectory -->
+	<!--  
+	<broker xmlns="http://activemq.apache.org/schema/core" 
+    	brokerName="localhost" 
+    	dataDirectory="./target/activemq-data/" 
+    	useJmx="true" 
+    	advisorySupport="false">
+	-->
+	
+    <broker xmlns="http://activemq.apache.org/schema/core" 
+    	brokerName="localhost" 
+    	dataDirectory="${activemq.base}/data" 
+    	useJmx="true" 
+    	advisorySupport="false">
+
+        <!-- 
+            Turn on optimizedDispatch
+            For more information, see:
+            http://activemq.apache.org/per-destination-policies.html 
+        -->
+        <destinationPolicy>
+            <policyMap>
+                <policyEntries>
+                    <policyEntry topic="&gt;" optimizedDispatch="true" memoryLimit="256mb" producerFlowControl="false"/>
+                    <policyEntry queue="&gt;" optimizedDispatch="true" memoryLimit="256mb" producerFlowControl="false">
+                      <!--
+		      <pendingQueuePolicy>
+			<vmQueueCursor />
+		      </pendingQueuePolicy>
+		      -->
+                      </policyEntry>
+                </policyEntries>
+            </policyMap>
+        </destinationPolicy>
+
+		<managementContext>
+            <managementContext createConnector="true"/>
+        </managementContext>
+		
+        <!-- 
+            Use KahaDB for persistence
+            For more information, see:
+            http://activemq.apache.org/kahadb.html
+        -->
+        <persistenceAdapter>
+	    <!--
+            <kahaDB directory="${activemq.base}/data" enableIndexWriteAsync="true" 
+            	enableJournalDiskSyncs="false" maxAsyncJobs="50000" 
+            	cleanupInterval="300000" checkpointInterval="50000" 
+            	journalMaxWriteBatchSize="8mb" journalMaxFileLength="1g" 
+            	indexCacheSize="200000" indexWriteBatchSize="100000"/>
+            -->
+            
+            
+            <kahaDB directory="${activemq.base}/data/kahadb" enableJournalDiskSyncs="false" 
+            	indexCacheSize="200000" indexWriteBatchSize="100000" journalMaxFileLength="1g" 
+            	journalMaxWriteBatchSize="8mb" />
+            
+            <!--
+            <kahaDB directory="${activemq.base}/data/kahadb" />
+            -->
+        </persistenceAdapter>
+
+		<systemUsage>
+	    	<systemUsage>
+	        	<memoryUsage>
+	          	    <memoryUsage limit="1 Gb"/>
+	        	</memoryUsage>
+	        	<storeUsage>
+	            	<storeUsage limit="250 Gb" name="foo"/>
+	       		</storeUsage>
+	       		<tempUsage>
+	             	<tempUsage limit="2048 mb"/>
+	       		</tempUsage>
+	    	</systemUsage>
+		</systemUsage>
+
+        <!-- 
+            Use NIO transport 
+            For more information, see:
+            http://activemq.apache.org/configuring-transports.html#ConfiguringTransports-TheNIOTransport
+        -->
+        <transportConnectors>
+            <!--transportConnector name="nio" uri="nio://0.0.0.0:61616"/
+            <transportConnector name="tcp" uri="tcp://0.0.0.0:61616?socketBufferSize=131072&amp;ioBufferSize=16384&amp;wireFormat.tightEncodingEnabled=false&amp;wireFormat.cacheSize=8192"/>
+            -->
+              
+            <transportConnector name="tcp" uri="tcp://0.0.0.0:61616?socketBufferSize=131072&amp;ioBufferSize=16384&amp;wireFormat.cacheSize=8192"/>
+            
+        </transportConnectors>
+    </broker>
+</beans>

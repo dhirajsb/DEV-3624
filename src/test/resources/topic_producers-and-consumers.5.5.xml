@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<test-configuration>
+
+    <run-stats-directory>./target/apache-mq5.5</run-stats-directory>
+    
+    <!-- Test duration in seconds -->
+    <producer-run-duration>3600</producer-run-duration>
+    <consumer-run-duration>30</consumer-run-duration>
+    
+    <activemq.base>/opt/FUSE/AMQ/apache-activemq-5.5.1-fuse-01-06/</activemq.base>
+    <log4j.configuration>./target/classes/log4j.properties</log4j.configuration>
+    <!--
+    <broker.config.uri>xbean:activemq5.5-brokers.xml</broker.config.uri>
+	-->
+	<broker.config.uri>xbean:activemq-yahoo.xml</broker.config.uri>
+
+    <!-- 
+    <broker-url>vm://secondfancy-lm</broker-url>
+    -->
+    <broker-url>tcp://localhost:61616?jms.watchTopicAdvisories=false&amp;jms.useAsyncSend=true</broker-url>
+    
+
+    <topics>
+        <!--Make sure topic names are unique -->
+        <topic name="test-topic1">
+            <num-consumers>10</num-consumers>
+            <num-producers>10</num-producers>
+            <type>queue</type>
+        </topic>
+        <topic name="test-topic2">
+            <!--Configure consumer but don't run them -->
+            <num-consumers>10</num-consumers>
+            <num-producers>10</num-producers>
+            <type>queue</type>
+        </topic>
+    </topics>
+</test-configuration>

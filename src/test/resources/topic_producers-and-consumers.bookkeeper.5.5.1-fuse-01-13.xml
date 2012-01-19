@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<test-configuration>
+
+    <run-stats-directory>./perfresults/bookkeeper</run-stats-directory>
+    
+    <!-- Test duration in seconds -->
+    <producer-run-duration>10</producer-run-duration>
+    <consumer-run-duration>10</consumer-run-duration>
+    
+    <activemq.base>/opt/FUSE/AMQ/apache-activemq-5.5.1-fuse-01-13/</activemq.base>
+    <log4j.configuration>./target/classes/log4j.properties</log4j.configuration>
+    <broker.config.uri>xbean:activemq-yahoo.xml</broker.config.uri>
+
+    <broker-url>tcp://localhost:61616?jms.watchTopicAdvisories=false&amp;jms.useAsyncSend=true</broker-url>
+
+    <topics>
+        <!--Make sure topic names are unique -->
+        <topic name="test-topic1">
+            <num-consumers>10</num-consumers>
+            <num-producers>10</num-producers>
+            <producer-tx-size>0</producer-tx-size>
+            <consumer-tx-size>0</consumer-tx-size>
+            <type>virtual-shared</type>
+        </topic>
+        <topic name="test-topic2">
+            <num-consumers>10</num-consumers>
+            <num-producers>10</num-producers>
+            <producer-tx-size>0</producer-tx-size>
+            <consumer-tx-size>0</consumer-tx-size>
+            <type>virtual-shared</type>
+        </topic>
+    </topics>
+</test-configuration>
