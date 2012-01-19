@@ -48,7 +48,7 @@ public abstract class JmsTest {
             producerRunDuration = config.getInt("producer-run-duration")*1000L;
             consumerRunDuration = config.getInt("consumer-run-duration")*1000L;
             statsDirName = config.getString("run-stats-directory");
-            pollInterval = config.getInt("poll-interval", 1)*1000L;
+            pollInterval = config.getInt("poll-interval", 0)*1000L;
 
 
 //            broker = new ActiveMQBroker(config);
