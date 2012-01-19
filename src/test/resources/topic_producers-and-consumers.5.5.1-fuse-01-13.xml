@@ -7,8 +7,7 @@
     <!-- Test duration in seconds -->
     <producer-run-duration>300</producer-run-duration>
     <consumer-run-duration>300</consumer-run-duration>
-    <poll-interval>0</poll-interval>
-    
+
     <activemq.base>/opt/FUSE/AMQ/apache-activemq-5.5.1-fuse-01-13/</activemq.base>
     <log4j.configuration>./target/classes/log4j.properties</log4j.configuration>
     <broker.config.uri>xbean:activemq-yahoo.xml</broker.config.uri>

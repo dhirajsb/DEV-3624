@@ -12,23 +12,23 @@
     <log4j.configuration>./target/classes/log4j.properties</log4j.configuration>
     <broker.config.uri>xbean:activemq-yahoo.xml</broker.config.uri>
 
-    <broker-url>tcp://localhost:61616?jms.watchTopicAdvisories=false&amp;jms.useAsyncSend=true</broker-url>
+    <broker-url>tcp://localhost:61616?jms.watchTopicAdvisories=false&amp;jms.useAsyncSend=true&amp;jms.alwaysSessionAsync=false&amp;jms.dispatchAsync=false&amp;socketBufferSize=131072&amp;ioBufferSize=16384&amp;wireFormat.tightEncodingEnabled=false&amp;wireFormat.cacheSize=8192</broker-url>
 
     <topics>
         <!--Make sure topic names are unique -->
         <topic name="test-topic1">
-            <num-consumers>10</num-consumers>
+            <num-consumers>1</num-consumers>
             <num-producers>10</num-producers>
             <producer-tx-size>0</producer-tx-size>
             <consumer-tx-size>0</consumer-tx-size>
-            <type>virtual-shared</type>
+            <type>dsub</type>
         </topic>
         <topic name="test-topic2">
-            <num-consumers>10</num-consumers>
+            <num-consumers>1</num-consumers>
             <num-producers>10</num-producers>
             <producer-tx-size>0</producer-tx-size>
             <consumer-tx-size>0</consumer-tx-size>
-            <type>virtual-shared</type>
+            <type>dsub</type>
         </topic>
     </topics>
 </test-configuration>
