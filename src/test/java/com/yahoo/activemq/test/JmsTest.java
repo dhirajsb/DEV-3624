@@ -210,79 +210,83 @@ public abstract class JmsTest {
         String prodPrefix = time+".producer";
         String consPrefix = time+".consumer";
         String suffix = ".csv";
-        File prodStatsFile = new File(statsDir,prodPrefix+suffix);
 
-        File consStatsFile = new File (statsDir,consPrefix+suffix);
-
-        FileWriter fw = new FileWriter(prodStatsFile);
-        //write header line first
-//        String hdrLine = "producer,time,msgCount\n";
-        String hdrLine = "time,msgCount\n";
-        fw.write(hdrLine);
-        Long prodMsgCount = new Long(0);
         Map<Long,Integer> aggrStats = new HashMap<Long, Integer>();
-        for (Map<Long,Integer> stat : pStats)
-        {
-             Set<Map.Entry<Long,Integer>> entries = stat.entrySet();
 
-            for (Map.Entry<Long, Integer> entry: entries)
+        if (pStats != null) {
+            File prodStatsFile = new File(statsDir,prodPrefix+suffix);
+            FileWriter fw = new FileWriter(prodStatsFile);
+            //write header line first
+    //        String hdrLine = "producer,time,msgCount\n";
+            String hdrLine = "time,msgCount\n";
+            fw.write(hdrLine);
+            long prodMsgCount = 0L;
+            for (Map<Long,Integer> stat : pStats)
             {
-                Long timestamp = entry.getKey();
-                Integer count = entry.getValue();
-                prodMsgCount += count;
-/*
-                String str = "producer,"+entry+","+count+"\n";
-                fw.write(str);
-*/
-                Integer aggrCount = aggrStats.get(timestamp);
-                if (aggrCount != null) {
-                    aggrStats.put(timestamp, aggrCount + count);
-                } else {
-                    aggrStats.put(timestamp, count);
+                 Set<Map.Entry<Long,Integer>> entries = stat.entrySet();
+
+                for (Map.Entry<Long, Integer> entry: entries)
+                {
+                    Long timestamp = entry.getKey();
+                    Integer count = entry.getValue();
+                    prodMsgCount += count;
+    /*
+                    String str = "producer,"+entry+","+count+"\n";
+                    fw.write(str);
+    */
+                    Integer aggrCount = aggrStats.get(timestamp);
+                    if (aggrCount != null) {
+                        aggrStats.put(timestamp, aggrCount + count);
+                    } else {
+                        aggrStats.put(timestamp, count);
+                    }
                 }
             }
-        }
-        for (Map.Entry<Long, Integer> entry : aggrStats.entrySet()) {
-            String str = ""+entry.getKey()+","+entry.getValue()+"\n";
-            fw.write(str);
-        }
-        fw.close();
-        System.out.println("produced " + prodMsgCount + " messages in " + producerRunDuration /1000 + " seconds");
-
-
-        Long consMsgCount = new Long(0);
-        fw = new FileWriter(consStatsFile);
-//        hdrLine = "consumer,time,msgCount\n";
-        hdrLine = "time,msgCount\n";
-        fw.write(hdrLine);
-        aggrStats.clear();
-        for (Map<Long,Integer> stat : cStats)
-        {
-             Set<Map.Entry<Long,Integer>> entries = stat.entrySet();
-
-            for (Map.Entry<Long, Integer> entry: entries)
-            {
-                Long timestamp = entry.getKey();
-                Integer count = entry.getValue();
-                consMsgCount += count;
-/*
-                String str = "consumer,"+entry+","+count+"\n";
+            for (Map.Entry<Long, Integer> entry : aggrStats.entrySet()) {
+                String str = ""+entry.getKey()+","+entry.getValue()+"\n";
                 fw.write(str);
-*/
-                Integer aggrCount = aggrStats.get(timestamp);
-                if (aggrCount != null) {
-                    aggrStats.put(timestamp, aggrCount + count);
-                } else {
-                    aggrStats.put(timestamp, count);
+            }
+            fw.close();
+            System.out.println("produced " + prodMsgCount + " messages in " + producerRunDuration /1000 + " seconds");
+        }
+
+        if (cStats != null) {
+            File consStatsFile = new File (statsDir,consPrefix+suffix);
+
+            long consMsgCount = 0L;
+            FileWriter fw = new FileWriter(consStatsFile);
+    //        hdrLine = "consumer,time,msgCount\n";
+            String hdrLine = "time,msgCount\n";
+            fw.write(hdrLine);
+            aggrStats.clear();
+            for (Map<Long,Integer> stat : cStats)
+            {
+                 Set<Map.Entry<Long,Integer>> entries = stat.entrySet();
+
+                for (Map.Entry<Long, Integer> entry: entries)
+                {
+                    Long timestamp = entry.getKey();
+                    Integer count = entry.getValue();
+                    consMsgCount += count;
+    /*
+                    String str = "consumer,"+entry+","+count+"\n";
+                    fw.write(str);
+    */
+                    Integer aggrCount = aggrStats.get(timestamp);
+                    if (aggrCount != null) {
+                        aggrStats.put(timestamp, aggrCount + count);
+                    } else {
+                        aggrStats.put(timestamp, count);
+                    }
                 }
             }
+            for (Map.Entry<Long, Integer> entry : aggrStats.entrySet()) {
+                String str = ""+entry.getKey()+","+entry.getValue()+"\n";
+                fw.write(str);
+            }
+            fw.close();
+            System.out.println("consumed " + consMsgCount + " messages in " + consumerRunDuration/1000 + " seconds");
         }
-        for (Map.Entry<Long, Integer> entry : aggrStats.entrySet()) {
-            String str = ""+entry.getKey()+","+entry.getValue()+"\n";
-            fw.write(str);
-        }
-        fw.close();
-        System.out.println("consumed " + consMsgCount + " messages in " + consumerRunDuration/1000 + " seconds");
 
 
 
