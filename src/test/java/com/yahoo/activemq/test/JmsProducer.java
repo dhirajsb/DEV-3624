@@ -32,7 +32,7 @@ public class JmsProducer implements Runnable {
     protected Integer producerId = null;
     protected int transactionSize;
     private final String type;
-//    private final AtomicLong produceCounter;
+    private final AtomicLong produceCounter;
 
 
     public JmsProducer(ConnectionFactory connectionFactory, String topicName, int producerid, int transactionSize, String type, AtomicLong produceCounter) throws Exception {
@@ -41,7 +41,7 @@ public class JmsProducer implements Runnable {
         this.producerId = producerid;
         this.transactionSize = transactionSize;
         this.type = type;
-//        this.produceCounter = produceCounter;
+        this.produceCounter = produceCounter;
 
         producerName = "PRODUCER-" + producerid;
         connection = connectionFactory.createConnection();
@@ -121,7 +121,9 @@ public class JmsProducer implements Runnable {
                     producer.send(message);
                 }
 
-//                produceCounter.incrementAndGet();
+                if(produceCounter!=null){
+                    produceCounter.incrementAndGet();
+                }
                 ++countValue;
                 long timestamp = System.currentTimeMillis() / 1000;
                 if (currentTimestamp != timestamp) {

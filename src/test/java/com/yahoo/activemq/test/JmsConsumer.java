@@ -23,7 +23,7 @@ class JmsConsumer implements Runnable {
     Integer consumerId = null;
     private final String type;
     private final int transactionSize;
-//    private final AtomicLong consumerCounter;
+    private final AtomicLong consumerCounter;
     protected ConnectionFactory connectionFactory = null;
     protected String consumerName = null;
     protected Connection connection = null;
@@ -39,7 +39,7 @@ class JmsConsumer implements Runnable {
         this.consumerId = consumerid;
         this.type = type;
         this.transactionSize = transactionSize;
-//        this.consumerCounter = consumerCounter;
+        this.consumerCounter = consumerCounter;
 
         consumerName = "CONSUMER-"+consumerid;
         connection = connectionFactory.createConnection();
@@ -129,7 +129,7 @@ class JmsConsumer implements Runnable {
                 if (message != null) {
                 	++counter;
 
-//                    consumerCounter.incrementAndGet();
+                    consumerCounter.incrementAndGet();
                     ++countValue;
                     long timestamp = System.currentTimeMillis() / 1000;
                     if (currentTimestamp != timestamp) {

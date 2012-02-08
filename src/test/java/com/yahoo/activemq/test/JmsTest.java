@@ -36,7 +36,7 @@ public abstract class JmsTest {
             System.out.println("Please pass topic configuration file in the command line");
             System.exit(-1);
         }
-
+        logger.info("Loading configuration: "+argv[0]);
 //        ActiveMQBroker broker = null;
         config = null;
         try {
@@ -55,7 +55,7 @@ public abstract class JmsTest {
 
             ConnectionFactory connectionFactory = createConnectionFactory(config);
 
-            final JmsProducerConsumer vmProdCons = new JmsProducerConsumer(connectionFactory, config);
+            final JmsProducerConsumer vmProdCons = new JmsProducerConsumer(connectionFactory, config, pollInterval > 0);
             final CountDownLatch latch = new CountDownLatch(2);
 
             // give consumers a head start
@@ -138,7 +138,7 @@ public abstract class JmsTest {
                                 long pollDuration = now-lastPollTime;
                                 long pollCount = count - lastProduceCounter;
                                 lastProduceCounter = count;
-                                System.out.println(String.format("produced %d msg in %.2f seconds (%.2f msg/sec) | poll added %d msg (%.2f msg/sec)", count, duration/1000.0, ((count*1000.0)/duration), pollCount, ((pollCount*1000.0)/pollDuration)));
+                                System.out.println(String.format("produced %,d msg in %.2f seconds (%,.2f msg/sec) | poll added %,d msg (%,.2f msg/sec)", count, duration/1000.0, ((count*1000.0)/duration), pollCount, ((pollCount*1000.0)/pollDuration)));
 
                             }
                         }
@@ -155,7 +155,7 @@ public abstract class JmsTest {
                                 long pollDuration = now-lastPollTime;
                                 long pollCount = count - lastConsumeCounter;
                                 lastConsumeCounter = count;
-                                System.out.println(String.format("consumed %d msg in %.2f seconds (%.2f msg/sec) | poll added %d msg (%.2f msg/sec)", count, duration/1000.0, ((count*1000.0)/duration), pollCount, ((pollCount*1000.0)/pollDuration)));
+                                System.out.println(String.format("consumed %,d msg in %.2f seconds (%,.2f msg/sec) | poll added %,d msg (%,.2f msg/sec)", count, duration/1000.0, ((count*1000.0)/duration), pollCount, ((pollCount*1000.0)/pollDuration)));
                             }
                         }
                     }
