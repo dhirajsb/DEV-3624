@@ -1,0 +1,375 @@
+Mon Feb  6 14:39:42 UTC 2012
+/home/y/libexec/maven/bin/mvn -Pamq5.6 -Pbroker1_sunnyday
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building DEV-3824-Testcase
+[INFO]    task-segment: [test]
+[INFO] ------------------------------------------------------------------------
+[INFO] [resources:resources {execution: default-resources}]
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 0 resource
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [resources:testResources {execution: default-testResources}]
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 25 resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: /home/harishs/activemq-leveldb/DEV-3624/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.yahoo.activemq.test.EmbeddedBrokerStompTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running com.yahoo.activemq.test.ApolloJmsTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+Running com.yahoo.activemq.test.ActiveMQJmsTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec
+
+Results :
+
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] Preparing exec:java
+[WARNING] Removing: java from forked lifecycle, to prevent recursive invocation.
+[INFO] No goals needed for project - skipping
+[INFO] [exec:java {execution: default}]
+Running producers for 1800 seconds
+Running consumers for 1800 seconds
+2012-02-06 14:40:14,010 [Thread-8       ] INFO  JmsConsumer                    - Started CONSUMER-1 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,010 [Thread-12      ] INFO  JmsConsumer                    - Started CONSUMER-3 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,010 [Thread-18      ] INFO  JmsConsumer                    - Started CONSUMER-6 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,010 [Thread-10      ] INFO  JmsConsumer                    - Started CONSUMER-2 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,010 [Thread-16      ] INFO  JmsConsumer                    - Started CONSUMER-5 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,010 [Thread-14      ] INFO  JmsConsumer                    - Started CONSUMER-4 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,010 [Thread-20      ] INFO  JmsConsumer                    - Started CONSUMER-7 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,010 [Thread-6       ] INFO  JmsConsumer                    - Started CONSUMER-0 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,016 [Thread-22      ] INFO  JmsConsumer                    - Started CONSUMER-8 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,022 [Thread-24      ] INFO  JmsConsumer                    - Started CONSUMER-9 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,031 [Thread-26      ] INFO  JmsConsumer                    - Started CONSUMER-0 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,040 [Thread-28      ] INFO  JmsConsumer                    - Started CONSUMER-1 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,048 [Thread-30      ] INFO  JmsConsumer                    - Started CONSUMER-2 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,056 [Thread-32      ] INFO  JmsConsumer                    - Started CONSUMER-3 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,063 [Thread-34      ] INFO  JmsConsumer                    - Started CONSUMER-4 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,081 [Thread-36      ] INFO  JmsConsumer                    - Started CONSUMER-5 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,086 [Thread-38      ] INFO  JmsConsumer                    - Started CONSUMER-6 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,094 [Thread-40      ] INFO  JmsConsumer                    - Started CONSUMER-7 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,102 [Thread-42      ] INFO  JmsConsumer                    - Started CONSUMER-8 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,111 [Thread-44      ] INFO  JmsConsumer                    - Started CONSUMER-9 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,135 [Thread-46      ] INFO  JmsProducer                    - Started PRODUCER-0 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,245 [Thread-78      ] INFO  JmsProducer                    - Started PRODUCER-6 on topic: VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,237 [Thread-76      ] INFO  JmsProducer                    - Started PRODUCER-5 on topic: VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,231 [Thread-74      ] INFO  JmsProducer                    - Started PRODUCER-4 on topic: VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,225 [Thread-72      ] INFO  JmsProducer                    - Started PRODUCER-3 on topic: VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,218 [Thread-70      ] INFO  JmsProducer                    - Started PRODUCER-2 on topic: VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,211 [Thread-68      ] INFO  JmsProducer                    - Started PRODUCER-1 on topic: VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,206 [Thread-66      ] INFO  JmsProducer                    - Started PRODUCER-0 on topic: VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,200 [Thread-64      ] INFO  JmsProducer                    - Started PRODUCER-9 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,194 [Thread-62      ] INFO  JmsProducer                    - Started PRODUCER-8 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,187 [Thread-60      ] INFO  JmsProducer                    - Started PRODUCER-7 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,181 [Thread-58      ] INFO  JmsProducer                    - Started PRODUCER-6 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,173 [Thread-56      ] INFO  JmsProducer                    - Started PRODUCER-5 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,168 [Thread-54      ] INFO  JmsProducer                    - Started PRODUCER-4 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,154 [Thread-52      ] INFO  JmsProducer                    - Started PRODUCER-3 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,148 [Thread-50      ] INFO  JmsProducer                    - Started PRODUCER-2 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,141 [Thread-48      ] INFO  JmsProducer                    - Started PRODUCER-1 on topic: VirtualTopic.test.test-topic1
+2012-02-06 14:40:14,256 [Thread-80      ] INFO  JmsProducer                    - Started PRODUCER-7 on topic: VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,283 [Thread-82      ] INFO  JmsProducer                    - Started PRODUCER-8 on topic: VirtualTopic.test.test-topic2
+2012-02-06 14:40:14,315 [Thread-84      ] INFO  JmsProducer                    - Started PRODUCER-9 on topic: VirtualTopic.test.test-topic2
+stopping producer and consumer after 1800 seconds
+stopping producers...
+stopped all producers
+stopping all consumers after 1800 seconds
+stopped all consumers
+produced 37065949 messages in 1800 seconds
+consumed 37049265 messages in 1800 seconds
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 30 minutes 14 seconds
+[INFO] Finished at: Mon Feb 06 15:10:16 UTC 2012
+[INFO] Final Memory: 21M/63M
+[INFO] ------------------------------------------------------------------------
+Mon Feb  6 15:10:26 UTC 2012
+/home/y/libexec/maven/bin/mvn -Pamq5.6 -Pbroker1_backlog
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building DEV-3824-Testcase
+[INFO]    task-segment: [test]
+[INFO] ------------------------------------------------------------------------
+[INFO] [resources:resources {execution: default-resources}]
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 0 resource
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [resources:testResources {execution: default-testResources}]
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 25 resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: /home/harishs/activemq-leveldb/DEV-3624/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.yahoo.activemq.test.EmbeddedBrokerStompTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec
+Running com.yahoo.activemq.test.ApolloJmsTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+Running com.yahoo.activemq.test.ActiveMQJmsTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+
+Results :
+
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] Preparing exec:java
+[WARNING] Removing: java from forked lifecycle, to prevent recursive invocation.
+[INFO] No goals needed for project - skipping
+[INFO] [exec:java {execution: default}]
+Running producers for 1800 seconds
+Running consumers for 0 seconds
+2012-02-06 15:10:30,591 [Thread-8       ] INFO  JmsConsumer                    - Started CONSUMER-1 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,595 [Thread-12      ] INFO  JmsConsumer                    - Started CONSUMER-3 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,601 [Thread-6       ] INFO  JmsConsumer                    - Started CONSUMER-0 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,607 [Thread-14      ] INFO  JmsConsumer                    - Started CONSUMER-4 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,608 [Thread-10      ] INFO  JmsConsumer                    - Started CONSUMER-2 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,628 [Thread-16      ] INFO  JmsConsumer                    - Started CONSUMER-5 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,654 [Thread-18      ] INFO  JmsConsumer                    - Started CONSUMER-6 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,665 [Thread-20      ] INFO  JmsConsumer                    - Started CONSUMER-7 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,670 [Thread-22      ] INFO  JmsConsumer                    - Started CONSUMER-8 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,674 [Thread-24      ] INFO  JmsConsumer                    - Started CONSUMER-9 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,680 [Thread-26      ] INFO  JmsConsumer                    - Started CONSUMER-0 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,684 [Thread-28      ] INFO  JmsConsumer                    - Started CONSUMER-1 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,689 [Thread-30      ] INFO  JmsConsumer                    - Started CONSUMER-2 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,694 [Thread-32      ] INFO  JmsConsumer                    - Started CONSUMER-3 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,702 [Thread-34      ] INFO  JmsConsumer                    - Started CONSUMER-4 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,726 [Thread-36      ] INFO  JmsConsumer                    - Started CONSUMER-5 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,749 [Thread-38      ] INFO  JmsConsumer                    - Started CONSUMER-6 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,825 [Thread-40      ] INFO  JmsConsumer                    - Started CONSUMER-7 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,837 [Thread-42      ] INFO  JmsConsumer                    - Started CONSUMER-8 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,846 [Thread-44      ] INFO  JmsConsumer                    - Started CONSUMER-9 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:10:30,887 [Thread-46      ] INFO  JmsProducer                    - Started PRODUCER-0 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,904 [Thread-48      ] INFO  JmsProducer                    - Started PRODUCER-1 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:30,986 [Thread-50      ] INFO  JmsProducer                    - Started PRODUCER-2 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:31,043 [Thread-52      ] INFO  JmsProducer                    - Started PRODUCER-3 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:31,061 [Thread-54      ] INFO  JmsProducer                    - Started PRODUCER-4 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:31,077 [Thread-56      ] INFO  JmsProducer                    - Started PRODUCER-5 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:31,091 [Thread-58      ] INFO  JmsProducer                    - Started PRODUCER-6 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:31,260 [Thread-60      ] INFO  JmsProducer                    - Started PRODUCER-7 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:31,286 [Thread-62      ] INFO  JmsProducer                    - Started PRODUCER-8 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:31,325 [Thread-64      ] INFO  JmsProducer                    - Started PRODUCER-9 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:10:31,368 [Thread-66      ] INFO  JmsProducer                    - Started PRODUCER-0 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:10:31,431 [Thread-68      ] INFO  JmsProducer                    - Started PRODUCER-1 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:10:31,445 [Thread-70      ] INFO  JmsProducer                    - Started PRODUCER-2 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:10:31,510 [Thread-72      ] INFO  JmsProducer                    - Started PRODUCER-3 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:10:31,523 [Thread-74      ] INFO  JmsProducer                    - Started PRODUCER-4 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:10:31,580 [Thread-76      ] INFO  JmsProducer                    - Started PRODUCER-5 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:10:31,640 [Thread-78      ] INFO  JmsProducer                    - Started PRODUCER-6 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:10:31,680 [Thread-80      ] INFO  JmsProducer                    - Started PRODUCER-7 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:10:31,722 [Thread-82      ] INFO  JmsProducer                    - Started PRODUCER-8 on topic: VirtualTopic.test.test-topic2
+stopping all consumers after 0 seconds
+2012-02-06 15:10:31,835 [Thread-84      ] INFO  JmsProducer                    - Started PRODUCER-9 on topic: VirtualTopic.test.test-topic2
+stopped all consumers
+stopping producer after 1800 seconds
+stopping producers...
+stopped all producers
+produced 40322224 messages in 1800 seconds
+consumed 31857 messages in 0 seconds
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 30 minutes 7 seconds
+[INFO] Finished at: Mon Feb 06 15:40:34 UTC 2012
+[INFO] Final Memory: 19M/58M
+[INFO] ------------------------------------------------------------------------
+Mon Feb  6 15:40:44 UTC 2012
+/home/y/libexec/maven/bin/mvn -Pamq5.6 -Pbroker1_drainage
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building DEV-3824-Testcase
+[INFO]    task-segment: [test]
+[INFO] ------------------------------------------------------------------------
+[INFO] [resources:resources {execution: default-resources}]
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 0 resource
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [resources:testResources {execution: default-testResources}]
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 25 resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: /home/harishs/activemq-leveldb/DEV-3624/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.yahoo.activemq.test.EmbeddedBrokerStompTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running com.yahoo.activemq.test.ApolloJmsTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
+Running com.yahoo.activemq.test.ActiveMQJmsTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+
+Results :
+
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] Preparing exec:java
+[WARNING] Removing: java from forked lifecycle, to prevent recursive invocation.
+[INFO] No goals needed for project - skipping
+[INFO] [exec:java {execution: default}]
+Running producers for 1800 seconds
+Running consumers for 1800 seconds
+2012-02-06 15:40:50,249 [Thread-8       ] INFO  JmsConsumer                    - Started CONSUMER-1 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,250 [Thread-20      ] INFO  JmsConsumer                    - Started CONSUMER-7 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,250 [Thread-16      ] INFO  JmsConsumer                    - Started CONSUMER-5 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,250 [Thread-18      ] INFO  JmsConsumer                    - Started CONSUMER-6 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,250 [Thread-12      ] INFO  JmsConsumer                    - Started CONSUMER-3 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,250 [Thread-6       ] INFO  JmsConsumer                    - Started CONSUMER-0 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,249 [Thread-22      ] INFO  JmsConsumer                    - Started CONSUMER-8 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,249 [Thread-14      ] INFO  JmsConsumer                    - Started CONSUMER-4 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,250 [Thread-10      ] INFO  JmsConsumer                    - Started CONSUMER-2 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,252 [Thread-24      ] INFO  JmsConsumer                    - Started CONSUMER-9 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,255 [Thread-26      ] INFO  JmsConsumer                    - Started CONSUMER-0 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,260 [Thread-28      ] INFO  JmsConsumer                    - Started CONSUMER-1 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,270 [Thread-30      ] INFO  JmsConsumer                    - Started CONSUMER-2 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,274 [Thread-32      ] INFO  JmsConsumer                    - Started CONSUMER-3 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,279 [Thread-34      ] INFO  JmsConsumer                    - Started CONSUMER-4 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,290 [Thread-36      ] INFO  JmsConsumer                    - Started CONSUMER-5 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,301 [Thread-38      ] INFO  JmsConsumer                    - Started CONSUMER-6 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,307 [Thread-40      ] INFO  JmsConsumer                    - Started CONSUMER-7 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,311 [Thread-42      ] INFO  JmsConsumer                    - Started CONSUMER-8 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,318 [Thread-44      ] INFO  JmsConsumer                    - Started CONSUMER-9 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,335 [Thread-46      ] INFO  JmsProducer                    - Started PRODUCER-0 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,367 [Thread-48      ] INFO  JmsProducer                    - Started PRODUCER-1 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,445 [Thread-50      ] INFO  JmsProducer                    - Started PRODUCER-2 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,470 [Thread-52      ] INFO  JmsProducer                    - Started PRODUCER-3 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,555 [Thread-54      ] INFO  JmsProducer                    - Started PRODUCER-4 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,586 [Thread-56      ] INFO  JmsProducer                    - Started PRODUCER-5 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,619 [Thread-58      ] INFO  JmsProducer                    - Started PRODUCER-6 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,708 [Thread-60      ] INFO  JmsProducer                    - Started PRODUCER-7 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,724 [Thread-62      ] INFO  JmsProducer                    - Started PRODUCER-8 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,807 [Thread-64      ] INFO  JmsProducer                    - Started PRODUCER-9 on topic: VirtualTopic.test.test-topic1
+2012-02-06 15:40:50,879 [Thread-66      ] INFO  JmsProducer                    - Started PRODUCER-0 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:40:50,881 [Thread-68      ] INFO  JmsProducer                    - Started PRODUCER-1 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:40:51,021 [Thread-70      ] INFO  JmsProducer                    - Started PRODUCER-2 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:40:51,030 [Thread-72      ] INFO  JmsProducer                    - Started PRODUCER-3 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:40:51,035 [Thread-74      ] INFO  JmsProducer                    - Started PRODUCER-4 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:40:51,040 [Thread-76      ] INFO  JmsProducer                    - Started PRODUCER-5 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:40:51,050 [Thread-78      ] INFO  JmsProducer                    - Started PRODUCER-6 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:40:51,059 [Thread-80      ] INFO  JmsProducer                    - Started PRODUCER-7 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:40:51,066 [Thread-82      ] INFO  JmsProducer                    - Started PRODUCER-8 on topic: VirtualTopic.test.test-topic2
+2012-02-06 15:40:51,072 [Thread-84      ] INFO  JmsProducer                    - Started PRODUCER-9 on topic: VirtualTopic.test.test-topic2
+stopping producer and consumer after 1800 seconds
+stopping producers...
+stopped all producers
+stopping all consumers after 1800 seconds
+stopped all consumers
+produced 17515017 messages in 1800 seconds
+consumed 13901414 messages in 1800 seconds
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 30 minutes 9 seconds
+[INFO] Finished at: Mon Feb 06 16:10:55 UTC 2012
+[INFO] Final Memory: 23M/60M
+[INFO] ------------------------------------------------------------------------
+Mon Feb  6 16:11:06 UTC 2012
+/home/y/libexec/maven/bin/mvn -Pamq5.6 -Pbroker1_drainageonly
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building DEV-3824-Testcase
+[INFO]    task-segment: [test]
+[INFO] ------------------------------------------------------------------------
+[INFO] [resources:resources {execution: default-resources}]
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 0 resource
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [resources:testResources {execution: default-testResources}]
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 25 resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: /home/harishs/activemq-leveldb/DEV-3624/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.yahoo.activemq.test.EmbeddedBrokerStompTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 sec
+Running com.yahoo.activemq.test.ApolloJmsTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec
+Running com.yahoo.activemq.test.ActiveMQJmsTest
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+
+Results :
+
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] Preparing exec:java
+[WARNING] Removing: java from forked lifecycle, to prevent recursive invocation.
+[INFO] No goals needed for project - skipping
+[INFO] [exec:java {execution: default}]
+Running producers for 0 seconds
+Running consumers for 5400 seconds
+2012-02-06 16:11:12,619 [Thread-24      ] INFO  JmsConsumer                    - Started CONSUMER-9 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,619 [Thread-16      ] INFO  JmsConsumer                    - Started CONSUMER-5 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,619 [Thread-8       ] INFO  JmsConsumer                    - Started CONSUMER-1 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,619 [Thread-14      ] INFO  JmsConsumer                    - Started CONSUMER-4 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,619 [Thread-20      ] INFO  JmsConsumer                    - Started CONSUMER-7 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,619 [Thread-22      ] INFO  JmsConsumer                    - Started CONSUMER-8 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,619 [Thread-18      ] INFO  JmsConsumer                    - Started CONSUMER-6 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,619 [Thread-10      ] INFO  JmsConsumer                    - Started CONSUMER-2 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,619 [Thread-12      ] INFO  JmsConsumer                    - Started CONSUMER-3 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,619 [Thread-6       ] INFO  JmsConsumer                    - Started CONSUMER-0 on queue: Consumer.shared.VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,624 [Thread-26      ] INFO  JmsConsumer                    - Started CONSUMER-0 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,630 [Thread-28      ] INFO  JmsConsumer                    - Started CONSUMER-1 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,635 [Thread-30      ] INFO  JmsConsumer                    - Started CONSUMER-2 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,639 [Thread-32      ] INFO  JmsConsumer                    - Started CONSUMER-3 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,645 [Thread-34      ] INFO  JmsConsumer                    - Started CONSUMER-4 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,678 [Thread-36      ] INFO  JmsConsumer                    - Started CONSUMER-5 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,688 [Thread-38      ] INFO  JmsConsumer                    - Started CONSUMER-6 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,705 [Thread-40      ] INFO  JmsConsumer                    - Started CONSUMER-7 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,725 [Thread-42      ] INFO  JmsConsumer                    - Started CONSUMER-8 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,745 [Thread-44      ] INFO  JmsConsumer                    - Started CONSUMER-9 on queue: Consumer.shared.VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,772 [Thread-46      ] INFO  JmsProducer                    - Started PRODUCER-0 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,780 [Thread-48      ] INFO  JmsProducer                    - Started PRODUCER-1 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,783 [Thread-50      ] INFO  JmsProducer                    - Started PRODUCER-2 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,786 [Thread-52      ] INFO  JmsProducer                    - Started PRODUCER-3 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,805 [Thread-54      ] INFO  JmsProducer                    - Started PRODUCER-4 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,810 [Thread-56      ] INFO  JmsProducer                    - Started PRODUCER-5 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,861 [Thread-58      ] INFO  JmsProducer                    - Started PRODUCER-6 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,864 [Thread-60      ] INFO  JmsProducer                    - Started PRODUCER-7 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,878 [Thread-62      ] INFO  JmsProducer                    - Started PRODUCER-8 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,894 [Thread-64      ] INFO  JmsProducer                    - Started PRODUCER-9 on topic: VirtualTopic.test.test-topic1
+2012-02-06 16:11:12,902 [Thread-66      ] INFO  JmsProducer                    - Started PRODUCER-0 on topic: VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,907 [Thread-68      ] INFO  JmsProducer                    - Started PRODUCER-1 on topic: VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,933 [Thread-70      ] INFO  JmsProducer                    - Started PRODUCER-2 on topic: VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,951 [Thread-72      ] INFO  JmsProducer                    - Started PRODUCER-3 on topic: VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,981 [Thread-74      ] INFO  JmsProducer                    - Started PRODUCER-4 on topic: VirtualTopic.test.test-topic2
+2012-02-06 16:11:12,991 [Thread-76      ] INFO  JmsProducer                    - Started PRODUCER-5 on topic: VirtualTopic.test.test-topic2
+2012-02-06 16:11:13,000 [Thread-78      ] INFO  JmsProducer                    - Started PRODUCER-6 on topic: VirtualTopic.test.test-topic2
+2012-02-06 16:11:13,004 [Thread-80      ] INFO  JmsProducer                    - Started PRODUCER-7 on topic: VirtualTopic.test.test-topic2
+2012-02-06 16:11:13,037 [Thread-82      ] INFO  JmsProducer                    - Started PRODUCER-8 on topic: VirtualTopic.test.test-topic2
+stopping all producers after 0 seconds
+2012-02-06 16:11:13,045 [Thread-84      ] INFO  JmsProducer                    - Started PRODUCER-9 on topic: VirtualTopic.test.test-topic2
+stopped all producers
+stopping all consumers after 5400 seconds
+stopped all consumers
+produced 28871 messages in 0 seconds
+consumed 36438651 messages in 5400 seconds
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 90 minutes 16 seconds
+[INFO] Finished at: Mon Feb 06 17:41:24 UTC 2012
+[INFO] Final Memory: 19M/41M
+[INFO] ------------------------------------------------------------------------

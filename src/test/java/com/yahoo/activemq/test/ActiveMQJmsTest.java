@@ -31,12 +31,5 @@ public class ActiveMQJmsTest extends JmsTest {
         new ActiveMQJmsTest().exec(args); 
     }
 
-    @Override
-    protected ConnectionFactory createConnectionFactory(XMLConfiguration config) {
-        String brokerUrl=config.getString("broker-url");
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(brokerUrl);
-        connectionFactory.setUseAsyncSend(true);
-        connectionFactory.setCopyMessageOnSend(true);
-        return connectionFactory;
-    }
+    
 }

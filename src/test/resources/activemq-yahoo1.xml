@@ -52,7 +52,17 @@
             </policyMap>
         </destinationPolicy>
 
+        <!-- 
+            Use KahaDB for persistence
+            For more information, see:
+            http://activemq.apache.org/kahadb.html
+        -->
         <persistenceAdapter>
+            <!--kahaDB directory="${activemq.base}/data/kahadb" enableIndexWriteAsync="true" indexWriteBatchSize="5000000" indexCacheSize="400000" journalMaxFileLength="512mb" enableJournalDiskSyncs="false" checkpointInterval="120000" maxAsyncJobs="50000"/-->
+	    <!-- test kahadb config -->
+            <!--kahaDB directory="${activemq.base}/data/kahadb" enableIndexWriteAsync="true" enableJournalDiskSyncs="false" maxAsyncJobs="50000" cleanupInterval="60000" checkpointInterval="120000" journalMaxWriteBatchSize="16mb" journalMaxFileLength="1g" indexCacheSize="300000" indexWriteBatchSize="2147483647"/-->
+            <!--kahaDB directory="${activemq.base}/data/kahadb" enableJournalDiskSyncs="false" maxAsyncJobs="50000" journalMaxFileLength="1g" indexCacheSize="200000" indexWriteBatchSize="2147483647"/-->
+
 	    <!-- level db adapter -->
 	    <bean xmlns="http://www.springframework.org/schema/beans" 
 	    	class="org.fusesource.mq.leveldb.LevelDBStore">
@@ -77,7 +87,11 @@
 	    	</systemUsage>
 		</systemUsage>
 
-
+        <!-- 
+            Use NIO transport 
+            For more information, see:
+            http://activemq.apache.org/configuring-transports.html#ConfiguringTransports-TheNIOTransport
+        -->
         <transportConnectors>
             <!--transportConnector name="nio" uri="nio://0.0.0.0:61616?socketBufferSize=131072&amp;ioBufferSize=16384&amp;wireFormat.tightEncodingEnabled=false&amp;wireFormat.cacheSize=8192"/-->
             <transportConnector name="nio" uri="nio://0.0.0.0:61617?socketBufferSize=131072&amp;ioBufferSize=16384&amp;wireFormat.tightEncodingEnabled=false&amp;wireFormat.cacheSize=8192"/>

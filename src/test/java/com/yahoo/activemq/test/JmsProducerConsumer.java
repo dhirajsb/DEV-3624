@@ -7,6 +7,7 @@ import javax.jms.ConnectionFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
     /**
@@ -38,37 +39,17 @@ import java.util.Map;
             return;
         }
 
-     /*   public void startConsumers()    throws Exception
-        {
-
-            if (consumerList == null )consumerList = new ArrayList<JmsConsumer>();
-            for (int topic = 0; topic < topicList.size(); topic++)
-            {
-                String key = "topics.topic("+topic+").num-consumers";
-                int numConsumersPerTopic = config.getInt(key);
-
-                key = "topics.topic("+topic+").consumer-tx-size";
-                int consumerTxSize = config.getInt(key, 0);
-
-                String topicName = (String)topicList.get(topic);
-                    // start consumers before the producers
-                    for (int consumers=0; consumers < numConsumersPerTopic ; consumers++ )
-                    {
-                        String type = config.getString("topics.topic(" + topic + ").type");
-                        consumerList.add(new JmsConsumer(connectionFactory, topicName, consumers, type, consumerTxSize));
-                    }
-            }
-        }
-
-	*/
+ 
         //MY CODE CHANGE
-        public void startConsumers()    throws Exception
+        public Integer startConsumers()    throws Exception
         {
+        	Integer maxRunDuration = 0;
 
             if (consumerList == null )consumerList = new ArrayList<JmsConsumer>();
             for (int topic = 0; topic < topicList.size(); topic++)
             {
             	String key = "topics.topic("+topic+").subscriptions.subscription[@name]";
+            	
                 List subscriptionList = config.getList(key);
                 key = "topics.topic("+topic+").consumer-tx-size";
                 int consumerTxSize = config.getInt(key, 0);
@@ -76,21 +57,31 @@ import java.util.Map;
                 String type = config.getString("topics.topic(" + topic + ").type");
                 for ( int subscription =0 ; subscription < subscriptionList.size() ; subscription++)
                 {
+                	Integer runDuration = config.getInt("topics.topic("+topic+").subscriptions.subscription("+subscription+").run-duration");
+                	if (maxRunDuration < runDuration)
+                	{
+                		maxRunDuration = runDuration;
+                	}
                 key = "topics.topic("+topic+").subscriptions.subscription("+subscription+").num-consumers";
                 int numConsumersPerTopic = config.getInt(key);
                // key = "topics.topic("+topic+").subscriptions.subscription("+subscription+").[@name]";
                 String subscriptionName = (String)subscriptionList.get(subscription);
-                
+                AtomicInteger consumeCount = new AtomicInteger();
+                consumeCount.set(0);
+                JmsTest.consumeCount.put(topicName+"-"+subscriptionName,consumeCount);
+                JmsTest.totalConsumeCount.put(topicName+"-"+subscriptionName, consumeCount);
                     // start consumers before the producers
                     for (int consumers=0; consumers < numConsumersPerTopic ; consumers++ )
                     {
-                        consumerList.add(new JmsConsumer(connectionFactory, topicName, consumers, type, consumerTxSize,subscriptionName ,subscription));
+                        consumerList.add(new JmsConsumer(connectionFactory, topicName, consumers, type, consumerTxSize,subscriptionName ,subscription, runDuration,consumeCount));
                     }
                 }    
             }
+            return maxRunDuration;
         }
-        public void startProducers()    throws Exception
+        public Integer startProducers()    throws Exception
         {
+        	Integer maxRunDuration = 0;
             if (producerList == null ) producerList = new ArrayList<JmsProducer>();
             for (int topic = 0; topic < topicList.size(); topic++)
                 {
@@ -109,60 +100,32 @@ import java.util.Map;
                     {
                     	arraylist[i] = Integer.parseInt((String)message_size.get(i));
                     }
+                    AtomicInteger produceCount = new AtomicInteger();
+                    produceCount.set(0);
+                    JmsTest.prodCount.put(topicName,produceCount);
+                    JmsTest.totalProdCount.put(topicName, produceCount);
                     // start producers at the end
+                    
+                    Integer runDuration = config.getInt("topics.topic(" + topic + ").run-duration");
+                    if (maxRunDuration < runDuration)
+                    {
+                    	maxRunDuration = runDuration;
+                    }
+                    
                     for (int producers=0; producers < numProducersPerTopic; producers++)
                     {
                         String type = config.getString("topics.topic(" + topic + ").type");
-                        producerList.add(new JmsProducer(connectionFactory, topicName, producers, producerTxSize, type , arraylist ));
+                        
+                        producerList.add(new JmsProducer(connectionFactory, topicName, producers, producerTxSize, type , arraylist, runDuration, produceCount ));
                     }
                 }
+            
+            return maxRunDuration;
 
 
         }
 
-        public List<Map<Long,Integer>> stopProducers()
-        {
-
-            if (producerList == null)
-            {
-                logger.warn("no producers running");
-                return null;
-            }
-            List<Map<Long,Integer>> stats = new ArrayList<Map<Long,Integer>>();
-
-             // start producers at the end
-             for (int producers=0; producers < producerList.size(); producers++)
-             {
-                   JmsProducer prod = producerList.get(producers);
-                   prod.stop();
-                   stats.add(prod.getStats());
-             }
-             producerList = null;
-
-            return stats;
-        }
-
-
-
-
-        public List<Map<Long,Integer>> stopConsumers()
-        {
-            if (consumerList == null )
-            {
-                logger.warn("no consumers running");
-                return null;
-            }
-            List<Map<Long,Integer>> stats = new ArrayList<Map<Long,Integer>>();
-            for (int cons=0; cons < consumerList.size(); cons++)
-            {
-                  JmsConsumer consumer = consumerList.get(cons);
-                  consumer.stop();
-                  stats.add(consumer.getStats());
-            }
-            consumerList = null;
-            return stats;
-        }
-
+      
 
 
 
