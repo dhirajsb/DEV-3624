@@ -5,7 +5,7 @@
     <run-stats-directory>./target/apache-mq5.5</run-stats-directory>
     
     <!-- Test duration in seconds -->
-    <producer-run-duration>3600</producer-run-duration>
+    <total-run-duration>3600</total-run-duration>
     <consumer-run-duration>30</consumer-run-duration>
     
     <activemq.base>/opt/FUSE/AMQ/apache-activemq-5.5.1-fuse-01-06/</activemq.base>

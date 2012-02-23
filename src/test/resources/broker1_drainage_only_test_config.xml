@@ -3,11 +3,11 @@
 <test-configuration>
 
     <!--run-stats-directory>./target/perfresults</run-stats-directory-->
-    <run-stats-directory>./perfresults/leveldb1</run-stats-directory>
+    <run-stats-directory>./perfresults/leveldb</run-stats-directory>
     
     <!-- Test duration in seconds -->
     <Producer-run-duration>0</Producer-run-duration>
-    <consumer-run-duration>3600</consumer-run-duration>
+    <consumer-run-duration>360</consumer-run-duration>
     
     <activemq.base>/home/harishs/apache-activemq-5.6-SNAPSHOT/</activemq.base>
     <log4j.configuration>./target/test-classes/log4j.properties</log4j.configuration>
@@ -19,18 +19,39 @@
     <topics>
         <!--Make sure topic names are unique -->
         <topic name="test-topic1">
-            <num-consumers>10</num-consumers>
             <num-producers>10</num-producers>
+            <message-size>3072</message-size><!--
+            <message-size>2048</message-size>
+            <message-size>4096</message-size>-->
             <producer-tx-size>0</producer-tx-size>
             <consumer-tx-size>0</consumer-tx-size>
-            <type>virtual-shared</type>
+            <type>virtual</type>
+            <subscriptions>
+                <subscription name="sub1">   
+                <num-consumers>10</num-consumers>
+                </subscription>
+    <!--            <subscription name="sub2">
+                <num-consumers>5</num-consumers>
+                </subscription>-->
+            </subscriptions>
         </topic>
         <topic name="test-topic2">
-            <num-consumers>10</num-consumers>
             <num-producers>10</num-producers>
+            <message-size>3072</message-size><!--
+            <message-size>2048</message-size>
+            <message-size>4096</message-size>-->
             <producer-tx-size>0</producer-tx-size>
             <consumer-tx-size>0</consumer-tx-size>
-            <type>virtual-shared</type>
+            <type>virtual</type>
+             <subscriptions>
+                <subscription name="sub3">   
+                <num-consumers>10</num-consumers>
+                </subscription>
+         <!--       <subscription name="sub4">
+                <num-consumers>5</num-consumers>
+                </subscription>-->
+            </subscriptions>
         </topic>
     </topics>
 </test-configuration>
+

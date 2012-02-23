@@ -7,23 +7,19 @@ package com.yahoo.activemq.test; /**
  */
 
 
-import org.fusesource.stomp.jms.StompJmsDestination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jms.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 class JmsConsumer implements Runnable {
-    protected static Logger logger = LoggerFactory.getLogger(JmsConsumer.class.getName());
-    private Thread thread = null;
+    private Thread t = null;
 
     Integer consumerId = null;
     private final String type;
     private final int transactionSize;
-    private final AtomicLong consumerCounter;
     protected ConnectionFactory connectionFactory = null;
     protected String consumerName = null;
     protected Connection connection = null;
@@ -32,27 +28,29 @@ class JmsConsumer implements Runnable {
     protected Map<Long, Integer> stats = new HashMap<Long, Integer>();
     protected volatile boolean stopped = false;
     protected String topicName;
-
-    public JmsConsumer(ConnectionFactory connectionFactory, String topicName, int consumerid, String type, int transactionSize, AtomicLong consumerCounter) throws Exception {
+    protected static Logger logger = LoggerFactory.getLogger(JmsConsumer.class.getName());
+    protected String subscriptionName = null;
+    protected int subscriptionId ;
+    
+    public JmsConsumer(ConnectionFactory connectionFactory, String topicName, int consumerid, String type, int transactionSize , String subscriptionName , int subscriptionId) throws Exception {
         this.connectionFactory = connectionFactory;
         this.topicName = topicName;
         this.consumerId = consumerid;
         this.type = type;
         this.transactionSize = transactionSize;
-        this.consumerCounter = consumerCounter;
+        this.subscriptionName = subscriptionName;
+        this.subscriptionId = subscriptionId;
 
-        consumerName = "CONSUMER-"+consumerid;
+        consumerName = "CONSUMER-" + consumerid ;
         connection = connectionFactory.createConnection();
-        String clientId;
+        String clientId = "CLIENT-" + topicName + "-" + subscriptionName + "-" + consumerid + "-" + subscriptionId;
         if ("dsub-shared".equals(type)) {
-            clientId = "CLIENT-" + topicName + "-shared";
-        } else {
-            clientId = "CLIENT-" + topicName + "-" + consumerid;
+            clientId =  "CLIENT-" + topicName;
         }
         connection.setClientID(clientId);
         connection.start();
-        thread = new Thread(this, "Thread-" + topicName + "-" + consumerName);
-        thread.start();
+        t = new Thread(this);
+        t.start();
     }
 
     public void run() {
@@ -66,7 +64,7 @@ class JmsConsumer implements Runnable {
                 // ActiveMQ only option:
                 // Publishers send to one topic and
                 // multiple consumers each get a copy of the messages sent (no load balancing)
-                String virtualTopicName = "Consumer." + consumerName + ".VirtualTopic.test." + topicName;
+                String virtualTopicName = "Consumer."+subscriptionName+".VirtualTopic." + topicName;
                 logger.info("Started "+consumerName+" on queue: "+virtualTopicName);
                 Queue dest = session.createQueue(virtualTopicName);
                 consumer = session.createConsumer(dest);
@@ -74,7 +72,7 @@ class JmsConsumer implements Runnable {
                 // ActiveMQ only option:
                 // Publishers send to one topics and
                 // multiple consumers load balancing off one queue.
-                String virtualTopicName = "Consumer.shared.VirtualTopic.test." + topicName;
+                String virtualTopicName = "Consumer.shared.VirtualTopic.test." + topicName ;
                 logger.info("Started "+consumerName+" on queue: "+virtualTopicName);
                 Queue dest = session.createQueue(virtualTopicName);
                 consumer = session.createConsumer(dest);
@@ -97,27 +95,6 @@ class JmsConsumer implements Runnable {
                 logger.info("Started durable shared "+consumerName+" on topic: "+topicName);
                 Topic dest = session.createTopic(topicName);
                 consumer = session.createDurableSubscriber(dest, "shared");
-            } else if ("queue-browsed".equals(type)) {
-
-                // An Apollo only option:
-                // Publishers send to one queue and
-                // multiple consumers browse the queue for messages.  If consumer
-                // tracks the sequence position then you get get cheap Exactly Once semantics
-                logger.info("Started queue browser "+consumerName+" on queue: "+topicName);
-                Queue dest = session.createQueue(topicName);
-
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("browser", "true");
-                headers.put("browser-end", "false");
-                // Messages will have a seq property set. Consumer should track this to 
-                // get Exactly Once semantics.
-                headers.put("include-seq", "seq");
-                // Consumer should set this to the next seq id it wants to receive.  Hopefully
-                // a real consumer knows the last seq it processed.
-                headers.put("from-seq", "0");
-                ((StompJmsDestination) dest).setSubscribeHeaders(headers);
-
-                consumer = session.createConsumer(dest);
             } else {
                 throw new IllegalArgumentException("Unknown topic type: "+type);
             }
@@ -126,10 +103,10 @@ class JmsConsumer implements Runnable {
             int countValue = 0;
             while (!stopped) {
                 Message message = consumer.receive(1000L);
+                //System.out.println("received message "+this.subscriptionName);
                 if (message != null) {
                 	++counter;
 
-                    consumerCounter.incrementAndGet();
                     ++countValue;
                     long timestamp = System.currentTimeMillis() / 1000;
                     if (currentTimestamp != timestamp) {
@@ -145,7 +122,7 @@ class JmsConsumer implements Runnable {
                     }
                 }
             }
-
+        //    System.out.println("stopping the consumer");
             // ensure the final countValue makes it into the stats
             stats.put(currentTimestamp, countValue);
 
@@ -163,22 +140,19 @@ class JmsConsumer implements Runnable {
             }
             synchronized (this) {
                 notify();
-                stopped = true;
             }
         }
     }
 
     public synchronized void stop() {
-        if (!stopped) {
-            stopped = true;
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                // ignore
-            }
+        stopped = true;
+  //      System.out.println("stop called");
+      try {
+            wait();
+        } catch (InterruptedException e) {
+            // ignore
         }
     }
-
     public Map<Long, Integer> getStats() {
 
         return stats;

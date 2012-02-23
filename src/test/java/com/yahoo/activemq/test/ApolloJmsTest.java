@@ -16,6 +16,7 @@
  */
 package com.yahoo.activemq.test;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.fusesource.stomp.jms.StompJmsConnectionFactory;
 

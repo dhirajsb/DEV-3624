@@ -11,14 +11,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jms.*;
+
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-
+import com.yahoo.activemq.*;
 public class JmsProducer implements Runnable {
-    protected static Logger logger = LoggerFactory.getLogger(JmsProducer.class.getName());
-    private Thread thread = null;
+    private Thread t = null;
 
     protected ConnectionFactory connectionFactory = null;
     protected BytesMessage message = null;
@@ -30,24 +31,26 @@ public class JmsProducer implements Runnable {
     protected volatile boolean stopped = false;
     protected String topicName;
     protected Integer producerId = null;
+    protected static Logger logger = LoggerFactory.getLogger(JmsProducer.class.getName());
+    protected volatile boolean done;
     protected int transactionSize;
     private final String type;
-    private final AtomicLong produceCounter;
+    public int[] arraylist = null;
 
 
-    public JmsProducer(ConnectionFactory connectionFactory, String topicName, int producerid, int transactionSize, String type, AtomicLong produceCounter) throws Exception {
+    public JmsProducer(ConnectionFactory connectionFactory, String topicName, int producerid, int transactionSize, String type , int[] arraylist) throws Exception {
         this.connectionFactory = connectionFactory;
         this.topicName = topicName;
         this.producerId = producerid;
         this.transactionSize = transactionSize;
         this.type = type;
-        this.produceCounter = produceCounter;
+        this.arraylist = arraylist;
 
         producerName = "PRODUCER-" + producerid;
         connection = connectionFactory.createConnection();
         connection.start();
-        thread = new Thread(this, "Thread-" + topicName + "-" + producerName);
-        thread.start();
+        t = new Thread(this);
+        t.start();
     }
 
     public void run() {
@@ -59,7 +62,7 @@ public class JmsProducer implements Runnable {
                 // ActiveMQ only option:
                 // Publishers send to one topic and
                 // multiple consumers each get a copy of the messages sent (no load balancing)
-                String virtualTopicName = "VirtualTopic.test." + topicName;
+                String virtualTopicName = "VirtualTopic." + topicName;
                 logger.info("Started "+producerName+" on topic: "+virtualTopicName);
                 Topic dest = session.createTopic(virtualTopicName);
                 producer = session.createProducer(dest);
@@ -90,40 +93,43 @@ public class JmsProducer implements Runnable {
                 logger.info("Started "+producerName+" on topic: "+topicName);
                 Topic dest = session.createTopic(topicName);
                 producer = session.createProducer(dest);
-            } else if ("queue-browsed".equals(type)) {
-                // An Apollo only option:
-                // Publishers send to one queue and
-                // multiple consumers browse the queue for messages.  If consumer
-                // tracks the sequence position then you get get cheap Exactly Once semantics
-                logger.info("Started "+producerName+" on queue: "+topicName);
-                Queue dest = session.createQueue(topicName);
-                producer = session.createProducer(dest);
             } else {
                 throw new IllegalArgumentException("Unknown topic type: "+type);
             }
 
             producer.setDeliveryMode(DeliveryMode.PERSISTENT);
             message = session.createBytesMessage();
-            byte[] bytes = new byte[1024 * 6];
-            new Random(System.currentTimeMillis()).nextBytes(bytes);
+            
+            byte[] bytes = new byte[70*1024];
+            
+            // don't have to really create random payload
+	    // new Random(System.currentTimeMillis()).nextBytes(bytes);
             message.writeBytes(bytes);
 
-            int msgNumber = 0;
+            ArrayList<ByteBuffer> byteBufferList = new ArrayList<ByteBuffer>();
+            for(int ii = 0; ii < arraylist.length;ii++)
+            {
+                    byteBufferList.add(ii, ByteBuffer.wrap(new byte[arraylist[ii]]));
+            }
+           // logger.info("payload size " + byteBufferList.get(0).array() );
+            message.writeBytes(byteBufferList.get(0).array());
+            long msgNumber = 0;
             long currentTimestamp = System.currentTimeMillis() / 1000;
             int countValue = 0;
+            int cur_idx = 0;
+            
             while (!stopped) {
-                long time1 = 0, time2 = 0;
-                if (logger.isDebugEnabled()) {
-                    time1 = System.nanoTime();
-                    producer.send(message);
-                    time2 = System.nanoTime();
-                } else {
-                    producer.send(message);
-                }
-
-                if(produceCounter!=null){
-                    produceCounter.incrementAndGet();
-                }
+            	// get data of arrayList[curr_idx] size
+            	//byte[] data = new byte[arraylist[cur_idx]];
+            	message.writeBytes(byteBufferList.get(cur_idx).array());
+            	cur_idx++;
+            	if (cur_idx == arraylist.length)
+            		cur_idx = 0;
+            	
+                long time1 = System.nanoTime();
+                producer.send(message);
+                long time2 = System.nanoTime();
+//                System.out.println("send from producer "+this.producerName);
                 ++countValue;
                 long timestamp = System.currentTimeMillis() / 1000;
                 if (currentTimestamp != timestamp) {
@@ -133,13 +139,12 @@ public class JmsProducer implements Runnable {
                 }
 
                 // commit every transactionSize messages
-                if (transactionSize > 0 && (++msgNumber > transactionSize)) {
+                if (transactionSize > 0 && (++msgNumber % transactionSize) == 0) {
                     session.commit();
-                    msgNumber = 0;
                 }
 
+                long time3 = System.nanoTime();
                 if (logger.isDebugEnabled()) {
-                    long time3 = System.nanoTime();
                     logger.debug("time to send " + (time2 - time1) + " time to sync " + (time3 - time2));
                 }
             }
@@ -161,19 +166,17 @@ public class JmsProducer implements Runnable {
             }
             synchronized (this) {
                 notify();
-                stopped = true;
+                done = true;
             }
         }
     }
 
     public synchronized void stop() {
-        if (!stopped) {
-            stopped = true;
-            try {
-                    wait();
-            } catch (InterruptedException e) {
-                // ignore
-            }
+        stopped = true;
+        try {
+            wait();
+        } catch (InterruptedException e) {
+            // ignore
         }
     }
 
@@ -181,3 +184,4 @@ public class JmsProducer implements Runnable {
         return stats;
     }
 }
+

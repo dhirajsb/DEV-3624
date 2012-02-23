@@ -41,7 +41,7 @@ public class EmbeddedBrokerStompTest {
             config = new XMLConfiguration(argv[0]);
 
             // value mentioned in config is in seconds, convert that into milli-seconds
-            totalRunDuration = config.getInt("producer-run-duration")*1000;
+            totalRunDuration = config.getInt("total-run-duration")*1000;
             consumerRunDuration = config.getInt("consumer-run-duration")*1000;
             statsDirName = config.getString("run-stats-directory");
 
