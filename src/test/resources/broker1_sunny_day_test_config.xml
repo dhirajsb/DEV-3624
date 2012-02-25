@@ -28,11 +28,11 @@
             <type>virtual</type>
             <subscriptions>
                 <subscription name="sub1"> 
-                <run-duration>0</run-duration>  
+                <run-duration>50</run-duration>  
                 <num-consumers>2</num-consumers>
                 </subscription>
                 <subscription name="sub2">
-                <run-duration>0</run-duration>
+                <run-duration>50</run-duration>
                 <num-consumers>2</num-consumers>
                 </subscription>
             </subscriptions>

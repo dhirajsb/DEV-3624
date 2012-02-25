@@ -19,6 +19,7 @@
     <topics>
         <!--Make sure topic names are unique -->
         <topic name="test-topic1">
+            <run-duration>600</run-duration>
             <num-producers>10</num-producers>
             <message-size>3072</message-size><!--
             <message-size>2048</message-size>
@@ -28,14 +29,17 @@
             <type>virtual</type>
             <subscriptions>
                 <subscription name="sub1">   
-                <num-consumers>5</num-consumers>
+                    <num-consumers>5</num-consumers>
+                    <run-duration>0</run-duration>
                 </subscription>
                 <subscription name="sub2">
-                <num-consumers>5</num-consumers>
+                    <num-consumers>5</num-consumers>
+                    <run-duration>0</run-duration>
                 </subscription>
             </subscriptions>
         </topic>
         <topic name="test-topic2">
+            <run-duration>600</run-duration>
             <num-producers>10</num-producers>
             <message-size>3072</message-size><!--
             <message-size>2048</message-size>
@@ -45,10 +49,12 @@
             <type>virtual</type>
              <subscriptions>
                 <subscription name="sub3">   
-                <num-consumers>5</num-consumers>
+                    <num-consumers>5</num-consumers>
+                    <run-duration>0</run-duration>
                 </subscription>
                 <subscription name="sub4">
-                <num-consumers>5</num-consumers>
+                    <num-consumers>5</num-consumers>
+                    <run-duration>0</run-duration>
                 </subscription>
             </subscriptions>
         </topic>

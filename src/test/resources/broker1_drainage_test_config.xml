@@ -5,10 +5,6 @@
     <!--run-stats-directory>./target/perfresults</run-stats-directory-->
     <run-stats-directory>./perfresults/leveldb</run-stats-directory>
     
-    <!-- Test duration in seconds -->
-    <Producer-run-duration>600</Producer-run-duration>
-    <consumer-run-duration>600</consumer-run-duration>
-    
     <activemq.base>/home/harishs/apache-activemq-5.6-SNAPSHOT/</activemq.base>
     <log4j.configuration>./target/test-classes/log4j.properties</log4j.configuration>
     <broker.config.uri>xbean:activemq-yahoo.xml</broker.config.uri>
@@ -19,6 +15,7 @@
     <topics>
         <!--Make sure topic names are unique -->
         <topic name="test-topic1">
+            <run-duration>600</run-duration>
             <num-producers>10</num-producers>
             <message-size>3072</message-size><!--
             <message-size>2048</message-size>
@@ -28,14 +25,17 @@
             <type>virtual</type>
             <subscriptions>
                 <subscription name="sub1">   
-                <num-consumers>5</num-consumers>
+                    <run-duration>600</run-duration>  
+                    <num-consumers>5</num-consumers>
                 </subscription>
                 <subscription name="sub2">
-                <num-consumers>5</num-consumers>
+                    <run-duration>600</run-duration>  
+                    <num-consumers>5</num-consumers>
                 </subscription>
             </subscriptions>
         </topic>
         <topic name="test-topic2">
+            <run-duration>600</run-duration>
             <num-producers>10</num-producers>
             <message-size>3072</message-size><!--
             <message-size>2048</message-size>
@@ -45,10 +45,12 @@
             <type>virtual</type>
              <subscriptions>
                 <subscription name="sub3">   
-                <num-consumers>5</num-consumers>
+                    <run-duration>600</run-duration>  
+                    <num-consumers>5</num-consumers>
                 </subscription>
                 <subscription name="sub4">
-                <num-consumers>5</num-consumers>
+                    <run-duration>600</run-duration>  
+                    <num-consumers>5</num-consumers>
                 </subscription>
             </subscriptions>
         </topic>
